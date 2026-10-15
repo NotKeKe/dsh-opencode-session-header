@@ -55,26 +55,6 @@ dsh plugin --profile <profile> add github:NotKeKe/dsh-opencode-session-header
 
 安裝成功會回報 `application: applied`，代表變更已生效（通常不需要重啟）。用 `Config.listConfigs`（不需批准）或 `dsh --profile <profile> --dump-config` 應該能看到 `opencode-session-header` 這一列。
 
-## 驗證
-
-**目前狀態（2026-10-15）**
-
-| 層級 | 狀態 |
-|---|---|
-| 離線行為檢查（`node verify.mjs`） | ✅ 8/8 通過 |
-| DSH 載入（`application: applied`、`warnings: []`） | ✅ 已確認 |
-| 端到端：真實 OpenCode Go 閘道接受補上的標頭 | ⚠️ **尚未確認** |
-
-也就是說：**規則層面已驗證，但「閘道因此放行」這件事還沒在作者機器上實測過。** 若你照著裝了卻仍然 400，那不是預期外的結果 —— 請開 issue 並附上完整錯誤訊息。
-
-離線行為檢查（8 項：注入、不覆蓋既有值、忽略其他 host、子網域、`Request` 參數、無法解析的 URL、重複啟用不疊加、卸載還原）：
-
-```sh
-node verify.mjs
-```
-
-端到端：把權限選擇器切成 **Auto review**，然後觸發一次工具呼叫。工具正常執行就代表 reviewer 請求帶上標頭了；若仍出現 `Auto review of tool "..." failed: ... MissingSessionID ...`，先確認提供介面的 dsh 進程有沒有載入到新的 bundle。
-
 ## 移除
 
 ```sh

@@ -57,6 +57,16 @@ dsh plugin --profile <profile> add github:NotKeKe/dsh-opencode-session-header
 
 ## 驗證
 
+**目前狀態（2026-10-15）**
+
+| 層級 | 狀態 |
+|---|---|
+| 離線行為檢查（`node verify.mjs`） | ✅ 8/8 通過 |
+| DSH 載入（`application: applied`、`warnings: []`） | ✅ 已確認 |
+| 端到端：真實 OpenCode Go 閘道接受補上的標頭 | ⚠️ **尚未確認** |
+
+也就是說：**規則層面已驗證，但「閘道因此放行」這件事還沒在作者機器上實測過。** 若你照著裝了卻仍然 400，那不是預期外的結果 —— 請開 issue 並附上完整錯誤訊息。
+
 離線行為檢查（8 項：注入、不覆蓋既有值、忽略其他 host、子網域、`Request` 參數、無法解析的 URL、重複啟用不疊加、卸載還原）：
 
 ```sh
@@ -93,3 +103,7 @@ dsh plugin --profile <profile> remove @local/dsh-opencode-session-header
 - pi-ai issue：`@earendil-works/pi-ai` never sends the `x-opencode-session` header —— https://github.com/earendil-works/pi/issues/9326
 - opencode issue：Go provider 400 MissingSessionID —— https://github.com/anomalyco/opencode/issues/47763
 - OpenCode 官方公告（2026-09-03）：自 09/06 起，缺少此標頭的請求可能開始報錯。
+
+## 授權
+
+MIT License —— 見 [LICENSE](LICENSE)。

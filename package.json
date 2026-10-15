@@ -1,0 +1,13 @@
+{
+  "name": "@local/dsh-opencode-session-header",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Inject the x-opencode-session header on OpenCode Go requests that are missing it.",
+  "exports": { ".": "./index.js", "./package.json": "./package.json" },
+  "meta": {
+    "title": "OpenCode session header",
+    "description": "補上 opencode.ai 出站請求缺失的 x-opencode-session 頭，修復 400 MissingSessionID；已有該頭時不覆蓋。"
+  },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}
